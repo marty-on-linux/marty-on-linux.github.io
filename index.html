@@ -4,54 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marty - Thumbnail Designer</title>
-    
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
 
     <div class="background-container">
-        <div class="mountain layer-1"></div>
-        <div class="mountain layer-2"></div>
-        <div class="mountain layer-3"></div>
-    </div>
+        <div class="stars"></div> <div class="mountain layer-1"></div> <div class="mountain layer-2"></div> <div class="mountain layer-3"></div> </div>
 
-    <div class="container">
-        
-        <div id="home-page" class="fade-in">
-            <img src="locked.png" alt="Marty PFP" class="pfp">
+    <div class="wrapper">
+        <div class="container">
             
-            <h1>Marty</h1>
-            <p class="subtitle">Professional Minecraft Thumbnail Designer</p>
-            
-            <button class="btn" onclick="showPortfolio()">Thumbnails</button>
-        </div>
-
-        <div id="portfolio-page" class="fade-in">
-            <button class="btn btn-back" onclick="showHome()">‹ Back</button>
-
-            <div class="gallery-item">
-                <img src="thumbnail.jpg" alt="ArchMC Thumbnail" class="gallery-img">
-                <div class="caption">ArchMC</div>
+            <div id="home-page" class="fade-in">
+                <img src="locked.png" alt="Marty PFP" class="pfp">
+                <h1>Marty</h1>
+                <p class="subtitle">Professional Minecraft Thumbnail Designer</p>
+                <button class="btn" onclick="showPortfolio()">Thumbnails</button>
+                
+                <div class="copyright">© marty-on-linux</div>
             </div>
 
-            <div class="gallery-item">
-                <img src="cyemerthumb.jpg" alt="Cyemer Thumbnail" class="gallery-img">
-                <div class="caption">Cyemer Client</div>
-            </div>
-        </div>
+            <div id="portfolio-page" class="fade-in">
+                <button class="btn btn-back" onclick="showHome()">‹ Back</button>
 
+                <div class="gallery-item">
+                    <img src="thumbnail.jpg" alt="ArchMC Thumbnail" class="gallery-img">
+                    <div class="caption">ArchMC</div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="cyemerthumb.jpg" alt="Cyemer Thumbnail" class="gallery-img">
+                    <div class="caption">Cyemer Client</div>
+                </div>
+
+                <div class="copyright">© marty-on-linux</div>
+            </div>
+
+        </div>
     </div>
 
     <script>
         function showPortfolio() {
             document.getElementById('home-page').style.display = 'none';
             document.getElementById('portfolio-page').style.display = 'block';
+            window.scrollTo(0, 0); // Resets scroll to top when changing page
         }
 
         function showHome() {
             document.getElementById('portfolio-page').style.display = 'none';
             document.getElementById('home-page').style.display = 'block';
+            window.scrollTo(0, 0);
         }
     </script>
 
