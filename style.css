@@ -8,110 +8,92 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* --- 2. GLOBAL STYLES --- */
+/* --- 2. GLOBAL RESET & SCROLLING --- */
 * {
     box-sizing: border-box;
 }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    /* Sky Gradient Background */
-    background: linear-gradient(180deg, #3d2c61 0%, #1a1528 100%); 
-    color: white;
-    /* FIX SCROLLING: Allows the body to grow and scroll */
+    width: 100%;
     min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    /* This ensures standard scrolling works on all devices */
     overflow-x: hidden;
     overflow-y: auto;
-    position: relative;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on mobile */
+}
+
+body {
+    background-color: #1a1528; /* Fallback color */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- 3. MOUNTAIN BACKGROUND (Carrd Style) --- */
-.background-container {
+/* --- 3. FIXED MOUNTAIN BACKGROUND --- */
+/* We use a fixed container so the mountains stay put (or move slightly) while text scrolls over them */
+.background-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-    overflow: hidden;
-    pointer-events: none; /* Allows click through */
+    background: linear-gradient(180deg, #3d2c61 0%, #1a1528 100%);
 }
 
-.mountain {
+.mountain-layer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat-x;
+    background-position: bottom left;
 }
 
-/* We use Clip-Path here to draw the jagged shapes exactly like the screenshot 
-   Instead of images, we draw polygons.
+/* Using SVG Data URIs for perfect, unbreakable jagged lines.
+   These recreate the "Carrd" style exactly.
 */
 
-/* Back Layer - Lighter Grey/Purple */
+/* Back Layer (Lightest) */
 .layer-1 {
-    height: 70%;
-    background-color: #6a5a8a; /* Lightest */
+    height: 60%;
     opacity: 0.3;
-    clip-path: polygon(
-        0% 100%, 0% 30%, 
-        15% 55%, 30% 20%, 
-        50% 60%, 70% 25%, 
-        85% 50%, 100% 10% 
-        , 100% 100%
-    );
-    /* Subtle breathing animation */
-    animation: sway 10s ease-in-out infinite alternate;
+    /* Jagged SVG pattern */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L200,200 L400,100 L600,250 L800,50 L1000,200 L1200,100 L1200,300 L0,300 Z' fill='%236a5a8a'/%3E%3C/svg%3E");
+    background-size: 150% 100%;
 }
 
-/* Middle Layer - Medium Dark */
+/* Middle Layer */
 .layer-2 {
-    height: 55%;
-    background-color: #4b3b69; 
+    height: 45%;
     opacity: 0.6;
-    clip-path: polygon(
-        0% 100%, 0% 50%, 
-        20% 20%, 40% 60%, 
-        60% 30%, 80% 65%, 
-        100% 40%, 100% 100%
-    );
-    animation: sway 8s ease-in-out infinite alternate-reverse;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,150 L150,50 L300,200 L450,100 L600,250 L750,50 L900,200 L1050,100 L1200,200 L1200,300 L0,300 Z' fill='%234b3b69'/%3E%3C/svg%3E");
+    background-size: 120% 100%;
 }
 
-/* Front Layer - Darkest (Bottom) */
+/* Front Layer (Darkest) */
 .layer-3 {
-    height: 35%;
-    background-color: #2b2046; /* Darkest matching footer area */
-    opacity: 0.9;
-    clip-path: polygon(
-        0% 100%, 0% 40%, 
-        25% 70%, 50% 30%, 
-        75% 60%, 100% 20%, 
-        100% 100%
-    );
-    animation: sway 12s ease-in-out infinite alternate;
+    height: 25%;
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,200 L100,100 L200,200 L300,50 L400,200 L500,100 L600,250 L700,50 L800,200 L900,100 L1000,250 L1100,50 L1200,200 L1200,300 L0,300 Z' fill='%232b2046'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
 }
 
-@keyframes sway {
-    0% { transform: scaleY(1.0) translateY(0px); }
-    100% { transform: scaleY(1.05) translateY(5px); }
-}
-
-/* --- 4. CONTENT WRAPPER --- */
+/* --- 4. MAIN CONTAINER --- */
 .container {
     width: 100%;
-    max-width: 500px;
-    text-align: center;
-    padding: 60px 20px 100px 20px; /* Extra padding at bottom for scroll space */
+    max-width: 500px; /* Looks good on desktop */
+    min-height: 100vh; /* Ensures layout fills screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center;
+    padding: 80px 20px 40px 20px; /* Top padding to breathe, Bottom for copyright */
     z-index: 10;
-    flex: 1; /* Pushes footer down */
 }
 
 /* --- 5. PROFILE PICTURE --- */
@@ -121,78 +103,85 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     margin-bottom: 25px;
     background-color: #000;
 }
 
-/* --- 6. TYPOGRAPHY (Adjusted Spacing) --- */
+/* --- 6. TEXT STYLES --- */
 h1 {
     font-family: 'Carter One', cursive;
     font-size: 52px;
     margin: 0;
-    /* SPREAD OUT TEXT */
-    letter-spacing: 6px; 
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+    letter-spacing: 4px; /* Spread out like requested */
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+    text-align: center;
+    line-height: 1.1;
 }
 
 p.subtitle {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    color: #e0e0e0;
+    color: #dadada;
     margin-top: 15px;
     margin-bottom: 40px;
     font-weight: 700;
     font-style: italic;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 /* --- 7. BUTTONS --- */
 .btn {
     background-color: #4b367c;
     color: white;
-    padding: 15px 40px;
+    padding: 16px 45px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
     cursor: pointer;
     font-size: 18px;
-    font-family: 'Montserrat', sans-serif; /* Cleaner font for buttons usually */
+    font-family: 'Montserrat', sans-serif;
     transition: transform 0.2s, background 0.2s;
     border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    background-color: #5e449b;
+    background-color: #634ba0;
 }
 
 .btn-back {
-    background: rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
     box-shadow: none;
     font-size: 14px;
-    padding: 8px 20px;
+    padding: 10px 25px;
     margin-bottom: 30px;
 }
 
 /* --- 8. GALLERY --- */
 .gallery-item {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 10px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px;
     margin-bottom: 30px;
     transition: transform 0.2s;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .gallery-item:hover {
     transform: scale(1.02);
+    border-color: rgba(255,255,255,0.2);
 }
 
 .gallery-img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
     display: block;
 }
@@ -204,22 +193,38 @@ p.subtitle {
     margin-bottom: 5px;
     color: white;
     letter-spacing: 1px;
+    text-align: center;
 }
 
-/* --- 9. COPYRIGHT (Bottom Bottom) --- */
-.copyright-container {
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    margin-top: auto; /* Pushes to very bottom */
+/* --- 9. COPYRIGHT (At the bottom of scroll) --- */
+.copyright {
+    margin-top: auto; /* Pushes to bottom of container */
+    padding-top: 50px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.3);
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 1px;
-    z-index: 10;
+    text-transform: uppercase;
+    text-align: center;
 }
 
-/* --- 10. ANIMATIONS --- */
+/* --- 10. MOBILE OPTIMIZATION --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 60px 15px 30px 15px;
+    }
+    
+    h1 {
+        font-size: 40px; /* Smaller text on phones */
+    }
+    
+    .pfp {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+/* Animations */
 #portfolio-page { display: none; }
 .fade-in { animation: fadeIn 0.5s ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
