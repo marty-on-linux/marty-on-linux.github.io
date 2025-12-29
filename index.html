@@ -3,217 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thumbnail Specialist | Portfolio</title>
+    <title>Marty - Thumbnail Designer</title>
     <style>
-        /* --- RESET & DARK THEME --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* --- GLOBAL STYLES --- */
         body {
-            background-color: #050505; /* Deep Black */
-            color: #ffffff;
-            font-family: 'Arial Black', 'Impact', sans-serif; /* Bold, loud fonts */
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif; /* Similar to the font in your screenshot */
+            background: linear-gradient(180deg, #2b2046 0%, #1a1528 100%); /* Dark Purple Gradient */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            width: 100%;
+            max-width: 450px; /* Limits width to look like a mobile card */
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- PROFILE PICTURE (Page 1) --- */
+        .pfp {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Makes it a circle */
+            object-fit: cover;
+            border: 4px solid #3d2c61; /* Subtle purple border */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Neon Glow Effect */
-        .neon-text {
-            color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 20px #ff00de, 0 0 40px #ff00de;
-        }
-        
-        .neon-green {
-            color: #00ffcc;
-            text-shadow: 0 0 10px #00ffcc;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle, #1a1a1a 0%, #000000 90%);
-            border-bottom: 2px solid #333;
-        }
-
-        .location-tag {
-            color: #00ffcc;
-            font-family: 'Segoe UI', sans-serif;
-            font-weight: bold;
+        h1 {
+            font-size: 42px;
+            margin: 0;
+            font-weight: 800;
             letter-spacing: 2px;
-            margin-bottom: 10px;
-            border: 1px solid #00ffcc;
-            padding: 5px 15px;
-            border-radius: 50px;
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+            text-transform: lowercase; /* Matches the 'seventyy' style */
         }
 
-        .hero h1 { font-size: 5rem; line-height: 1; margin-bottom: 20px; }
-        .hero p {
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 1.2rem;
-            color: #bbb;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        .cta-button {
-            padding: 15px 50px;
-            background: #ff00de;
-            border: none;
-            color: #fff;
-            font-size: 1.5rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            transform: skew(-10deg);
-            display: inline-block;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .cta-button:hover {
-            background: #fff;
-            color: #ff00de;
-            box-shadow: 0 0 30px #ff00de;
-        }
-
-        /* --- PORTFOLIO GRID --- */
-        .portfolio { padding: 4rem 2rem; background: #080808; }
-        
-        .section-title {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: #151515;
-            aspect-ratio: 16 / 9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #333;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-        .card:hover img { transform: scale(1.05); }
-
-        /* --- PRICING SECTION --- */
-        .pricing {
-            padding: 5rem 2rem;
-            text-align: center;
-            background: linear-gradient(180deg, #050505 0%, #111 100%);
-        }
-
-        .price-card {
-            border: 4px solid #00ffcc;
-            background: #111;
-            padding: 3rem;
-            max-width: 500px;
-            margin: 0 auto;
-            transform: skew(-5deg);
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
-        }
-
-        .price-tag {
-            font-size: 6rem;
-            color: #00ffcc;
-            line-height: 1;
-            margin: 20px 0;
-            text-shadow: 0 0 20px #00ffcc;
-        }
-
-        .price-details {
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 1.2rem;
-            color: #ddd;
-            list-style: none;
+        p.subtitle {
+            font-size: 14px;
+            color: #dcdcdc; /* Slightly grey white */
+            margin-top: 10px;
             margin-bottom: 30px;
-            line-height: 2;
+            font-weight: 600;
         }
 
-        /* --- FOOTER --- */
-        footer { text-align: center; padding: 3rem; color: #555; font-family: sans-serif; }
+        /* --- BUTTONS --- */
+        .btn {
+            background-color: #4b367c;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            border: none;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
 
-        @media (max-width: 768px) { .hero h1 { font-size: 3rem; } .price-tag { font-size: 4rem; } }
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #5e449b;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* --- PORTFOLIO GALLERY (Page 2) --- */
+        .gallery-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .caption {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        /* --- PAGE SWITCHING LOGIC --- */
+        #portfolio-page {
+            display: none; /* Hidden by default */
+        }
+        
+        /* Fade animation */
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="location-tag">🇦🇺 BASED IN AUSTRALIA</div>
-        <h1 class="neon-text">THUMBNAIL<br>GOD</h1>
-        <p>You make the content. I make them click. High contrast, high CTR, Minecraft PvP style.</p>
-        <a href="#pricing" class="cta-button">Get One Now</a>
-    </header>
-
-    <section class="portfolio">
-        <h2 class="section-title">MY WORK</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <img src="thumbnail.jpg" alt="Arch MC Server Thumbnail">
-            </div>
-
-            <div class="card">
-                <img src="cyemerthumb.jpg" alt="Cyemer Client PvP Thumbnail">
-            </div>
-
-            <div class="card">
-                <div style="text-align:center;">
-                    <h3 style="color:#333; font-size: 2rem;">YOUR VIDEO<br>HERE</h3>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="pricing" class="pricing">
-        <h2 class="section-title">PRICING</h2>
+    <div class="container">
         
-        <div class="price-card">
-            <h3>LIMITED TIME OFFER</h3>
-            <div class="price-tag">FREE</div>
-            <ul class="price-details">
-                <li>✅ High Quality 4K Export</li>
-                <li>✅ Custom 3D Text</li>
-                <li>✅ Color Grading & Effects</li>
-                <li>✅ 24 Hour Delivery</li>
-            </ul>
-            <p style="color: #888; margin-bottom: 20px; font-family: sans-serif; font-size: 0.9rem;">
-                I am building my portfolio. You get a fire thumbnail, I get the practice.
-            </p>
+        <div id="home-page" class="fade-in">
+            <img src="locked.jpg" alt="Marty PFP" class="pfp">
             
-            <a href="https://discord.gg/YOUR_INVITE_HERE" class="cta-button">DM ME ON DISCORD</a>
+            <h1>Marty</h1>
+            <p class="subtitle">Professional Minecraft Thumbnail Designer</p>
             
+            <button class="btn" onclick="showPortfolio()">Thumbnails</button>
         </div>
-    </section>
 
-    <footer>
-        <p>© 2025. Created by Me.</p>
-    </footer>
+        <div id="portfolio-page" class="fade-in">
+            <button class="btn btn-back" onclick="showHome()">‹ Back</button>
+
+            <div class="gallery-item">
+                <img src="thumbnail.jpg" alt="ArchMC Thumbnail" class="gallery-img">
+                <div class="caption">ArchMC</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="cyemerthumb.jpg" alt="Cyemer Thumbnail" class="gallery-img">
+                <div class="caption">Cyemer Client</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple script to switch pages without reloading
+        function showPortfolio() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('portfolio-page').style.display = 'block';
+        }
+
+        function showHome() {
+            document.getElementById('portfolio-page').style.display = 'none';
+            document.getElementById('home-page').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
