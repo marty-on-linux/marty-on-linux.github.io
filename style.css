@@ -20,21 +20,19 @@ html, body {
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    /* This ensures standard scrolling works on all devices */
     overflow-x: hidden;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth scroll on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
-    background-color: #1a1528; /* Fallback color */
+    background-color: #1a1528;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 /* --- 3. FIXED MOUNTAIN BACKGROUND --- */
-/* We use a fixed container so the mountains stay put (or move slightly) while text scrolls over them */
 .background-wrapper {
     position: fixed;
     top: 0;
@@ -54,20 +52,14 @@ body {
     background-position: bottom left;
 }
 
-/* Using SVG Data URIs for perfect, unbreakable jagged lines.
-   These recreate the "Carrd" style exactly.
-*/
-
-/* Back Layer (Lightest) */
+/* SVG Data URIs for Mountains */
 .layer-1 {
     height: 60%;
     opacity: 0.3;
-    /* Jagged SVG pattern */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L200,200 L400,100 L600,250 L800,50 L1000,200 L1200,100 L1200,300 L0,300 Z' fill='%236a5a8a'/%3E%3C/svg%3E");
     background-size: 150% 100%;
 }
 
-/* Middle Layer */
 .layer-2 {
     height: 45%;
     opacity: 0.6;
@@ -75,7 +67,6 @@ body {
     background-size: 120% 100%;
 }
 
-/* Front Layer (Darkest) */
 .layer-3 {
     height: 25%;
     opacity: 1;
@@ -86,25 +77,34 @@ body {
 /* --- 4. MAIN CONTAINER --- */
 .container {
     width: 100%;
-    max-width: 500px; /* Looks good on desktop */
-    min-height: 100vh; /* Ensures layout fills screen */
+    max-width: 500px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers content vertically */
+    justify-content: center;
     align-items: center;
-    padding: 80px 20px 40px 20px; /* Top padding to breathe, Bottom for copyright */
+    padding: 80px 20px 40px 20px;
     z-index: 10;
 }
 
-/* --- 5. PROFILE PICTURE --- */
+/* FORCE CENTER ALIGNMENT FOR HOME PAGE */
+#home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This forces the image to snap to center */
+    width: 100%;
+}
+
+/* --- 5. PROFILE PICTURE (FIXED) --- */
 .pfp {
+    display: block;
+    margin: 0 auto 25px auto; /* 0 Top, Auto Right, 25px Bottom, Auto Left */
     width: 160px;
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
     border: none;
     box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    margin-bottom: 25px;
     background-color: #000;
 }
 
@@ -113,10 +113,11 @@ h1 {
     font-family: 'Carter One', cursive;
     font-size: 52px;
     margin: 0;
-    letter-spacing: 4px; /* Spread out like requested */
+    letter-spacing: 4px;
     text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
     text-align: center;
     line-height: 1.1;
+    width: 100%;
 }
 
 p.subtitle {
@@ -129,6 +130,7 @@ p.subtitle {
     font-style: italic;
     letter-spacing: 1px;
     text-align: center;
+    width: 100%;
 }
 
 /* --- 7. BUTTONS --- */
@@ -146,6 +148,7 @@ p.subtitle {
     transition: transform 0.2s, background 0.2s;
     border: none;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    margin: 0 auto; /* Ensures button centers too */
 }
 
 .btn:hover {
@@ -196,9 +199,9 @@ p.subtitle {
     text-align: center;
 }
 
-/* --- 9. COPYRIGHT (At the bottom of scroll) --- */
+/* --- 9. COPYRIGHT --- */
 .copyright {
-    margin-top: auto; /* Pushes to bottom of container */
+    margin-top: auto;
     padding-top: 50px;
     font-size: 12px;
     color: rgba(255, 255, 255, 0.3);
@@ -206,6 +209,7 @@ p.subtitle {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
+    width: 100%;
 }
 
 /* --- 10. MOBILE OPTIMIZATION --- */
@@ -215,7 +219,7 @@ p.subtitle {
     }
     
     h1 {
-        font-size: 40px; /* Smaller text on phones */
+        font-size: 40px;
     }
     
     .pfp {
