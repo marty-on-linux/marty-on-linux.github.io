@@ -9,10 +9,10 @@
 </head>
 <body>
 
-    <div class="background-container">
-        <div class="mountain layer-1"></div>
-        <div class="mountain layer-2"></div>
-        <div class="mountain layer-3"></div>
+    <div class="background-wrapper">
+        <div class="mountain-layer layer-1"></div>
+        <div class="mountain-layer layer-2"></div>
+        <div class="mountain-layer layer-3"></div>
     </div>
 
     <div class="container">
@@ -23,15 +23,19 @@
             <h1>Marty</h1>
             <p class="subtitle">Professional Minecraft Thumbnail Designer</p>
             
-            <button class="btn" onclick="showPortfolio()">Thumbnails</button>
+            <div style="text-align: center;">
+                <button class="btn" onclick="showPortfolio()">Thumbnails</button>
+            </div>
         </div>
 
         <div id="portfolio-page" class="fade-in">
-            <button class="btn btn-back" onclick="showHome()">‹ Back</button>
+            <div style="text-align: center;">
+                <button class="btn btn-back" onclick="showHome()">‹ Back</button>
+            </div>
 
             <div class="gallery-item">
                 <img src="thumbnail.jpg" alt="ArchMC Thumbnail" class="gallery-img">
-                <div class="caption">ArchMC</div>
+                <div class="caption">Hacking on ArchMC</div>
             </div>
 
             <div class="gallery-item">
@@ -40,10 +44,10 @@
             </div>
         </div>
 
-    </div>
+        <div class="copyright">
+            © marty-on-linux
+        </div>
 
-    <div class="copyright-container">
-        © marty-on-linux
     </div>
 
     <script>
