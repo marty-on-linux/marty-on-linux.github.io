@@ -1,14 +1,22 @@
-/* --- 1. FONTS --- */
-@font-face {
-  font-family: 'Carter One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/carterone/v18/q5uCsoe5IOB2-pXv9UcNExN8hA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+/* --- 1. FONTS (Extracted from IntelliJ Project) --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* --- 2. GLOBAL VARIABLES (Extracted Palette) --- */
+:root {
+    --primary-purple: #8b5cf6;
+    --primary-blue: #3b82f6;
+    --primary-cyan: #06b6d4;
+    --dark-bg: #0f0f23;
+    --darker-bg: #0a0a1a;
+    --card-bg: rgba(139, 92, 246, 0.05);
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-accent: #e4e4e7;
+    --border-color: rgba(139, 92, 246, 0.2);
+    --gradient-primary: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
 }
 
-/* --- 2. GLOBAL RESET & SCROLLING --- */
+/* --- 3. GLOBAL RESET & SCROLLING --- */
 * {
     box-sizing: border-box;
 }
@@ -18,21 +26,22 @@ html, body {
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    font-family: 'Montserrat', sans-serif;
-    color: white;
+    /* Replaced Montserrat with Extracted Secondary Font 'Inter' for readability */
+    font-family: 'Inter', sans-serif; 
+    color: var(--text-primary);
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 
 body {
-    background-color: #1a1528;
+    background-color: var(--darker-bg);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- 3. FIXED MOUNTAIN BACKGROUND --- */
+/* --- 4. FIXED MOUNTAIN BACKGROUND --- */
 .background-wrapper {
     position: fixed;
     top: 0;
@@ -40,7 +49,8 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(180deg, #3d2c61 0%, #1a1528 100%);
+    /* Map original gradient to new Dark Palette */
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
 }
 
 .mountain-layer {
@@ -52,29 +62,34 @@ body {
     background-position: bottom left;
 }
 
-/* SVG Data URIs for Mountains */
+/* SVG Data URIs Updated with New Palette Hex Codes */
+/* Note: Hex codes encoded in URL (%23) */
+
 .layer-1 {
     height: 60%;
     opacity: 0.3;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L200,200 L400,100 L600,250 L800,50 L1000,200 L1200,100 L1200,300 L0,300 Z' fill='%236a5a8a'/%3E%3C/svg%3E");
+    /* Fill changed to Primary Blue (#3b82f6 -> %233b82f6) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,100 L200,200 L400,100 L600,250 L800,50 L1000,200 L1200,100 L1200,300 L0,300 Z' fill='%233b82f6'/%3E%3C/svg%3E");
     background-size: 150% 100%;
 }
 
 .layer-2 {
     height: 45%;
-    opacity: 0.6;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,150 L150,50 L300,200 L450,100 L600,250 L750,50 L900,200 L1050,100 L1200,200 L1200,300 L0,300 Z' fill='%234b3b69'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    /* Fill changed to Primary Purple (#8b5cf6 -> %238b5cf6) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,150 L150,50 L300,200 L450,100 L600,250 L750,50 L900,200 L1050,100 L1200,200 L1200,300 L0,300 Z' fill='%238b5cf6'/%3E%3C/svg%3E");
     background-size: 120% 100%;
 }
 
 .layer-3 {
     height: 25%;
     opacity: 1;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,200 L100,100 L200,200 L300,50 L400,200 L500,100 L600,250 L700,50 L800,200 L900,100 L1000,250 L1100,50 L1200,200 L1200,300 L0,300 Z' fill='%232b2046'/%3E%3C/svg%3E");
+    /* Fill changed to Dark BG (#0f0f23 -> %230f0f23) to blend with bottom */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300' preserveAspectRatio='none'%3E%3Cpath d='M0,200 L100,100 L200,200 L300,50 L400,200 L500,100 L600,250 L700,50 L800,200 L900,100 L1000,250 L1100,50 L1200,200 L1200,300 L0,300 Z' fill='%230f0f23'/%3E%3C/svg%3E");
     background-size: 100% 100%;
 }
 
-/* --- 4. MAIN CONTAINER --- */
+/* --- 5. MAIN CONTAINER --- */
 .container {
     width: 100%;
     max-width: 500px;
@@ -87,99 +102,112 @@ body {
     z-index: 10;
 }
 
-/* FORCE CENTER ALIGNMENT FOR HOME PAGE */
 #home-page {
     display: flex;
     flex-direction: column;
-    align-items: center; /* This forces the image to snap to center */
+    align-items: center;
     width: 100%;
 }
 
-/* --- 5. PROFILE PICTURE (FIXED) --- */
+/* --- 6. PROFILE PICTURE --- */
 .pfp {
     display: block;
-    margin: 0 auto 25px auto; /* 0 Top, Auto Right, 25px Bottom, Auto Left */
+    margin: 0 auto 25px auto;
     width: 160px;
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    border: none;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    background-color: #000;
+    /* Updated border/shadow to match extracted Glow styles */
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 20px var(--primary-purple); 
+    background-color: var(--darker-bg);
 }
 
-/* --- 6. TEXT STYLES --- */
+/* --- 7. TEXT STYLES --- */
 h1 {
-    font-family: 'Carter One', cursive;
-    font-size: 52px;
+    /* Replaced Carter One with Extracted Primary Font 'Press Start 2P' */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 42px; /* Adjusted slightly for the wider font */
     margin: 0;
-    letter-spacing: 4px;
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+    /* Updated text shadow to extracted Purple */
+    text-shadow: 4px 4px 0px var(--primary-purple); 
     text-align: center;
-    line-height: 1.1;
+    line-height: 1.4;
     width: 100%;
+    color: var(--text-primary);
 }
 
 p.subtitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
-    color: #dadada;
+    color: var(--text-secondary);
     margin-top: 15px;
     margin-bottom: 40px;
-    font-weight: 700;
+    font-weight: 500;
     font-style: italic;
     letter-spacing: 1px;
     text-align: center;
     width: 100%;
 }
 
-/* --- 7. BUTTONS --- */
+/* --- 8. BUTTONS --- */
 .btn {
-    background-color: #4b367c;
-    color: white;
+    /* Mapped to extracted Gradient */
+    background: var(--gradient-primary);
+    color: var(--text-primary);
     padding: 16px 45px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
     cursor: pointer;
-    font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
-    transition: transform 0.2s, background 0.2s;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    margin: 0 auto; /* Ensures button centers too */
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    margin: 0 auto;
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    background-color: #634ba0;
+    /* Intensify glow on hover */
+    box-shadow: 0 0 20px var(--primary-blue);
 }
 
 .btn-back {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     box-shadow: none;
     font-size: 14px;
     padding: 10px 25px;
     margin-bottom: 30px;
+    color: var(--text-secondary);
 }
 
-/* --- 8. GALLERY --- */
+.btn-back:hover {
+    color: var(--text-primary);
+    border-color: var(--primary-purple);
+}
+
+/* --- 9. GALLERY --- */
 .gallery-item {
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    /* Mapped to extracted Card Background */
+    background-color: var(--card-bg);
     border-radius: 12px;
     padding: 12px;
     margin-bottom: 30px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, border-color 0.2s;
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
 }
 
 .gallery-item:hover {
     transform: scale(1.02);
-    border-color: rgba(255,255,255,0.2);
+    border-color: var(--primary-cyan);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
 }
 
 .gallery-img {
@@ -190,36 +218,37 @@ p.subtitle {
 }
 
 .caption {
-    font-family: 'Carter One', cursive;
-    font-size: 24px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    color: white;
-    letter-spacing: 1px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px; /* Reduced for the retro font readability */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-cyan); /* Mapped to Highlight color */
+    letter-spacing: 0px;
     text-align: center;
+    line-height: 1.5;
 }
 
-/* --- 9. COPYRIGHT --- */
+/* --- 10. COPYRIGHT --- */
 .copyright {
     margin-top: auto;
     padding-top: 50px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.3);
-    font-family: 'Montserrat', sans-serif;
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
     width: 100%;
 }
 
-/* --- 10. MOBILE OPTIMIZATION --- */
+/* --- 11. MOBILE OPTIMIZATION --- */
 @media (max-width: 600px) {
     .container {
         padding: 60px 15px 30px 15px;
     }
     
     h1 {
-        font-size: 40px;
+        font-size: 28px; /* Adjusted for Press Start 2P mobile sizing */
     }
     
     .pfp {
@@ -228,7 +257,7 @@ p.subtitle {
     }
 }
 
-/* Animations */
+/* Animations (Untouched) */
 #portfolio-page { display: none; }
 .fade-in { animation: fadeIn 0.5s ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
