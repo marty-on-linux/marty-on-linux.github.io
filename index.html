@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto:; upgrade-insecure-requests">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <title>Marty - Thumbnail Designer</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -24,14 +29,14 @@
             <p class="subtitle">Professional Minecraft Thumbnail Designer</p>
             
             <div style="text-align: center;">
-                <button class="btn" onclick="showPortfolio()">Thumbnails</button>
+                <button id="show-portfolio-btn" class="btn" type="button">Thumbnails</button>
                 <a href="contact.html" class="btn" style="display: inline-block; margin-left: 10px; text-decoration: none;">Contact & Pricing</a>
             </div>
         </div>
 
         <div id="portfolio-page" class="fade-in">
             <div style="text-align: center;">
-                <button class="btn btn-back" onclick="showHome()">‹ Back</button>
+                <button id="show-home-btn" class="btn btn-back" type="button">‹ Back</button>
             </div>
 
             <div class="gallery-item">
@@ -84,6 +89,9 @@
             document.getElementById('home-page').style.display = 'block';
             window.scrollTo(0, 0);
         }
+
+        document.getElementById('show-portfolio-btn').addEventListener('click', showPortfolio);
+        document.getElementById('show-home-btn').addEventListener('click', showHome);
     </script>
 
 </body>

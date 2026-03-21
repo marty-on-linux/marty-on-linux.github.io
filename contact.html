@@ -3,6 +3,11 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto:; upgrade-insecure-requests"/>
+<meta http-equiv="X-Frame-Options" content="DENY"/>
+<meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()"/>
 <title>Contact &amp; Pricing</title>
 <!-- Google Fonts: Inter for body, Press Start 2P for headings -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -121,18 +126,18 @@
 <h2 class="font-pixel text-xl text-white mb-8 tracking-wider">Get in Touch</h2>
 <div class="w-full max-w-sm">
 <!-- BEGIN: Contact Form -->
-<form class="space-y-4 mb-8" onsubmit="handleSubmit(event)">
+<form class="space-y-4 mb-8" id="contact-form" autocomplete="on">
 <div>
 <label class="sr-only" for="name">Your Name</label>
-<input class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" id="name" name="name" placeholder="Your Name" type="text" required/>
+<input class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" id="name" name="name" placeholder="Your Name" type="text" maxlength="80" minlength="2" required/>
 </div>
 <div>
 <label class="sr-only" for="email">Your Email</label>
-<input class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" id="email" name="email" placeholder="Your Email" type="email" required/>
+<input class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors" id="email" name="email" placeholder="Your Email" type="email" maxlength="254" required/>
 </div>
 <div>
 <label class="sr-only" for="message">Message</label>
-<textarea class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors resize-y" id="message" name="message" placeholder="Message" rows="4" required></textarea>
+<textarea class="w-full bg-brand-inputBg border-2 border-brand-inputBorder rounded-lg px-4 py-3 text-white placeholder-brand-textMuted focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition-colors resize-y" id="message" name="message" placeholder="Message" rows="4" maxlength="2000" required></textarea>
 </div>
 <button class="w-full bg-brand-accent hover:bg-brand-accentLight text-white font-semibold py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent focus:ring-offset-brand-bg" type="submit">
               Send Message
@@ -141,10 +146,10 @@
 <!-- END: Contact Form -->
 <!-- BEGIN: Social Links -->
 <div class="flex justify-center space-x-4">
-<a aria-label="Discord" class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-white hover:bg-brand-accentLight transition-colors" href="https://discord.com/users/986066979616071690" title="Discord" target="_blank">
+<a aria-label="Discord" class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-white hover:bg-brand-accentLight transition-colors" href="https://discord.com/users/986066979616071690" title="Discord" target="_blank" rel="noopener noreferrer">
 <i class="fa-brands fa-discord text-xl"></i>
 </a>
-<a aria-label="YouTube" class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-white hover:bg-brand-accentLight transition-colors" href="https://www.youtube.com/@qifnnmc" title="YouTube" target="_blank">
+<a aria-label="YouTube" class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-white hover:bg-brand-accentLight transition-colors" href="https://www.youtube.com/@qifnnmc" title="YouTube" target="_blank" rel="noopener noreferrer">
 <i class="fa-brands fa-youtube text-xl"></i>
 </a>
 </div>
@@ -165,11 +170,30 @@
 <!-- END: Footer -->
 
 <script>
+  function sanitizeInput(value, maxLength) {
+    return value
+      .replace(/[<>]/g, '')
+      .replace(/[\r\n]+/g, ' ')
+      .trim()
+      .slice(0, maxLength);
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    const name = sanitizeInput(document.getElementById('name').value, 80);
+    const email = sanitizeInput(document.getElementById('email').value, 254);
+    const message = sanitizeInput(document.getElementById('message').value, 2000);
+
+    if (!name || !email || !message) {
+      alert('Please complete all fields before sending your message.');
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      alert('Please provide a valid email address.');
+      return;
+    }
     
     const subject = `Message from ${name}`;
     const body = `From: ${email}\n\n${message}`;
@@ -179,6 +203,8 @@
     alert('Thank you for your message! Your email client will open.');
     event.target.reset();
   }
+
+  document.getElementById('contact-form').addEventListener('submit', handleSubmit);
 </script>
 
 </body></html>
